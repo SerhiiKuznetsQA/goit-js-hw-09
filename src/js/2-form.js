@@ -3,35 +3,35 @@ const emailInput = formFeedback.querySelector('input[name="email"]');
 const messageTextarea = formFeedback.querySelector('textarea[name="message"]');
 let formData = { email: "", message: "" }
 
-function saveFormData(formData) { 
+function saveFormData(formData) {
     localStorage.setItem('feedback-form-state', JSON.stringify(formData));
 }
-function loadFormData() { 
+function loadFormData() {
     const savedData = localStorage.getItem('feedback-form-state');
-    if (savedData) { 
+    if (savedData) {
         const parseData = JSON.parse(savedData);
         formData.email = parseData.email || "";
         formData.message = parseData.message || "";
-        emailInput.value = formData.email; 
-        messageTextarea.value = formData.message
+        emailInput.value = formData.email.trim()
+        messageTextarea.value = formData.message.trim()
     }
 }
 loadFormData();
 
-function updateFormData() { 
-    formData.email = emailInput.value
-    formData.message = messageTextarea.value
+function updateFormData() {
+    formData.email = emailInput.value.trim()
+    formData.message = messageTextarea.value.trim()
     saveFormData(formData)
 }
 
-formFeedback.addEventListener("input", function (evt) { 
+formFeedback.addEventListener("input", function (evt) {
      if (evt.target === emailInput || evt.target === messageTextarea) {
        updateFormData();
      }
 })
-formFeedback.addEventListener("submit", function (evt) { 
+formFeedback.addEventListener("submit", function (evt) {
     evt.preventDefault();
-    if (formData.email === '' || formData.message === "") { 
+    if (formData.email === '' || formData.message === "") {
         alert('Fill please all fields');
         return
     }
@@ -41,3 +41,9 @@ formFeedback.addEventListener("submit", function (evt) {
     emailInput.value = "";
     messageTextarea.value = ""
 })
+
+
+
+
+
+
